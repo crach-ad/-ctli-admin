@@ -127,35 +127,6 @@ export interface ProjectName {
   projectname: string;
 }
 
-// All lookup table names for the admin lookup management page
-export const LOOKUP_TABLES = [
-  { name: "concretestrengthslump", column: "concretestrengthslump", label: "Concrete Strength/Slump" },
-  { name: "cross_sectional", column: "cross_sectional", label: "Cross Sectional Area" },
-  { name: "cylage", column: "cylage", label: "Cylinder Age" },
-  { name: "cylcastedby", column: "cylcastedby", label: "Cylinders Casted By" },
-  { name: "cylno", column: "cylno", label: "Cylinder Number" },
-  { name: "cylsize", column: "cylsize", label: "Cylinder Size" },
-  { name: "cyltype", column: "cyltype", label: "Cylinder Type" },
-  { name: "cylweight", column: "cylweight", label: "Cylinder Weight" },
-  { name: "datasheetrecorder", column: "datasheetrecorder", label: "Datasheet Recorder" },
-  { name: "datasheet", column: "datasheet", label: "Datasheet" },
-  { name: "gridline1", column: "gridline1", label: "Gridline 1" },
-  { name: "gridlinea", column: "gridlinesa", label: "Gridline A" },
-  { name: "ins", column: "ins", label: "INS" },
-  { name: "mixdesign28days", column: "mixdesign28days", label: "Mix Design 28 Days" },
-  { name: "psi", column: "psi", label: "PSI" },
-  { name: "readymixcompany", column: "readymixcompany", label: "Ready Mix Company" },
-  { name: "slump", column: "slump", label: "Slump" },
-  { name: "structurepourlocation2", column: "structurepourlocation2", label: "Structure/Pour Location" },
-  { name: "testno", column: "testno", label: "Test Number" },
-  { name: "trucksequence", column: "trucksequence", label: "Truck Sequence" },
-  { name: "typebreak", column: "typebreak", label: "Type of Break" },
-  { name: "weather", column: "weather", label: "Weather" },
-  { name: "ydspertruck", column: "ydspertruck", label: "Yards per Truck" },
-] as const;
-
-export type LookupTableDef = (typeof LOOKUP_TABLES)[number];
-
 export interface CalendarEvent {
   id: number;
   projectname: string | null;

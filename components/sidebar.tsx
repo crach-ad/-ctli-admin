@@ -12,23 +12,21 @@ import {
   FlaskConical,
   Atom,
   CalendarDays,
-  Settings,
   LogOut,
 } from "lucide-react";
 
 const navItems = [
-  { href: "/", label: "Dashboard", icon: LayoutDashboard, roles: null },
-  { href: "/projects", label: "Projects", icon: FolderOpen, roles: null },
-  { href: "/concrete-field", label: "Field Inspections", icon: HardHat, roles: null },
-  { href: "/concrete-tests", label: "Concrete Tests", icon: FlaskConical, roles: null },
-  { href: "/nuclear-density", label: "Nuclear Density", icon: Atom, roles: null },
-  { href: "/calendar", label: "Calendar", icon: CalendarDays, roles: null },
-  { href: "/lookups", label: "Lookup Tables", icon: Settings, roles: ["admin"] as string[] },
+  { href: "/", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/projects", label: "Projects", icon: FolderOpen },
+  { href: "/concrete-field", label: "Field Inspections", icon: HardHat },
+  { href: "/concrete-tests", label: "Concrete Tests", icon: FlaskConical },
+  { href: "/nuclear-density", label: "Nuclear Density", icon: Atom },
+  { href: "/calendar", label: "Calendar", icon: CalendarDays },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
-  const { user, roles, signOut } = useAuth();
+  const { user, signOut } = useAuth();
 
   if (!user) return null;
 
@@ -40,9 +38,6 @@ export function Sidebar() {
       </div>
       <nav className="flex-1 space-y-1 p-2">
         {navItems.map((item) => {
-          if (item.roles && !item.roles.some((r) => roles.includes(r as any))) {
-            return null;
-          }
           const isActive =
             item.href === "/"
               ? pathname === "/"
