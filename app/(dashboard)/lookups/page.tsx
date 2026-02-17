@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/components/auth-provider";
 import { Button } from "@/components/ui/button";
@@ -62,7 +63,7 @@ export default function LookupsPage() {
       .from(selectedTable.name)
       .insert({ [selectedTable.column]: newValue.trim() });
     if (error) {
-      alert("Error: " + error.message);
+      toast.error(error.message);
       return;
     }
     setNewValue("");
@@ -77,7 +78,7 @@ export default function LookupsPage() {
       .delete()
       .eq(selectedTable.column, value);
     if (error) {
-      alert("Error: " + error.message);
+      toast.error(error.message);
       return;
     }
     loadTable(selectedTable);

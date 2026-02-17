@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/components/auth-provider";
 import { useGeolocation } from "@/lib/hooks/use-geolocation";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -85,7 +86,7 @@ export function ConcreteFieldForm({ initialData, basePath = "/concrete-field", o
 
     setSaving(false);
     if (error) {
-      alert("Error saving: " + error.message);
+      toast.error("Error saving: " + error.message);
     } else if (onSaved) {
       onSaved();
     } else {

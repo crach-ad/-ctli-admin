@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/components/auth-provider";
 import { useGeolocation } from "@/lib/hooks/use-geolocation";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { InputField, SelectField } from "@/components/form-field";
@@ -66,7 +67,7 @@ export function NuclearDensityForm({ initialData, basePath = "/nuclear-density",
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.projectname) {
-      alert("Project is required");
+      toast.error("Project is required");
       return;
     }
     setSaving(true);
@@ -91,7 +92,7 @@ export function NuclearDensityForm({ initialData, basePath = "/nuclear-density",
 
     setSaving(false);
     if (error) {
-      alert("Error saving: " + error.message);
+      toast.error("Error saving: " + error.message);
     } else if (onSaved) {
       onSaved();
     } else {

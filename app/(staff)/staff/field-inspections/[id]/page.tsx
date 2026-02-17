@@ -10,6 +10,7 @@ import { DataTable, Column } from "@/components/data-table";
 import { DetailRow } from "@/components/detail-row";
 import { PdfDownloadButton } from "@/components/pdf-download-button";
 import { ArrowLeft, Pencil } from "lucide-react";
+import { DetailSkeleton } from "@/components/detail-skeleton";
 import { LocationMap } from "@/components/location-map";
 import type { ConcreteField, ConcreteFieldSubform } from "@/lib/types";
 
@@ -53,7 +54,7 @@ export default function StaffFieldInspectionDetailPage() {
     load();
   }, [id, user, authLoading]);
 
-  if (loading || authLoading) return <p className="text-muted-foreground">Loading...</p>;
+  if (loading || authLoading) return <DetailSkeleton rows={18} />;
   if (!record) return <p>Record not found or access denied.</p>;
 
   return (

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 
@@ -36,7 +37,7 @@ export function PdfDownloadButton({
       URL.revokeObjectURL(url);
     } catch (err) {
       console.error("PDF generation failed:", err);
-      alert("Failed to generate PDF");
+      toast.error("Failed to generate PDF");
     } finally {
       setGenerating(false);
     }

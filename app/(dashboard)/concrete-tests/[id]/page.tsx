@@ -9,6 +9,7 @@ import { DetailRow } from "@/components/detail-row";
 import { RoleGate } from "@/components/role-gate";
 import { PdfDownloadButton } from "@/components/pdf-download-button";
 import { ArrowLeft, Pencil } from "lucide-react";
+import { DetailSkeleton } from "@/components/detail-skeleton";
 import { LocationMap } from "@/components/location-map";
 import type { ConcreteTestSubform } from "@/lib/types";
 
@@ -32,7 +33,7 @@ export default function ConcreteTestDetailPage() {
     load();
   }, [id]);
 
-  if (loading) return <p className="text-muted-foreground">Loading...</p>;
+  if (loading) return <DetailSkeleton rows={22} />;
   if (!record) return <p>Record not found.</p>;
 
   return (
