@@ -20,18 +20,27 @@ export default function DashboardPage() {
 
   useEffect(() => {
     async function loadStats() {
-      const [projects, field, tests, nuclear] = await Promise.all([
-        supabase.from("project_name").select("*", { count: "exact", head: true }),
-        supabase.from("tblconcretefield").select("*", { count: "exact", head: true }),
-        supabase.from("tblconcretetestsubform").select("*", { count: "exact", head: true }),
-        supabase.from("tblnucleardensity").select("*", { count: "exact", head: true }),
-      ]);
-      setStats({
-        projects: projects.count ?? 0,
-        fieldInspections: field.count ?? 0,
-        concreteTests: tests.count ?? 0,
-        nuclearDensity: nuclear.count ?? 0,
-      });
+      try {
+        const [projects, field, tests, nuclear] = await Promise.all([
+          supabase.from("project_name").select("*", { count: "exact", head: true }),
+          supabase.from("tblconcretefield").select("*", { count: "exact", head: true }),
+          supabase.from("tblconcretetestsubform").select("*", { count: "exact", head: true }),
+          supabase.from("tblnucleardensity").select("*", { count: "exact", head: true }),
+        ]);
+        if (projects.error) console.error("projects query error:", projects.error);
+        if (field.error) console.error("field query error:", field.error);
+        if (tests.error) console.error("tests query error:", tests.error);
+        if (nuclear.error) console.error("nuclear query error:", nuclear.error);
+        setStats({
+          projects: projects.count ?? 0,
+          fieldInspections: field.count ?? 0,
+          concreteTests: tests.count ?? 0,
+          nuclearDensity: nuclear.count ?? 0,
+        });
+      } catch (err) {
+        console.error("Dashboard stats failed:", err);
+        setStats({ projects: 0, fieldInspections: 0, concreteTests: 0, nuclearDensity: 0 });
+      }
     }
     loadStats();
   }, []);

@@ -84,19 +84,19 @@ export default function StaffDashboardPage() {
       ]);
 
       const all: RecentItem[] = [
-        ...(fields.data ?? []).map((r) => ({
+        ...(fields.data ?? []).map((r: any) => ({
           id: r.id,
           type: "field" as const,
           projectname: r.projectname,
           date: r.fieldinspectiondate,
         })),
-        ...(tests.data ?? []).map((r) => ({
+        ...(tests.data ?? []).map((r: any) => ({
           id: r.id,
           type: "test" as const,
           projectname: r.projectname,
           date: r.castdate,
         })),
-        ...(densities.data ?? []).map((r) => ({
+        ...(densities.data ?? []).map((r: any) => ({
           id: r.id,
           type: "density" as const,
           projectname: r.projectname,

@@ -39,7 +39,7 @@ export default function CalendarPage() {
         supabase.from("project_name").select("projectname").order("projectname"),
       ]);
       setTests((testsRes.data ?? []) as ConcreteTestSubform[]);
-      setProjects((projectsRes.data ?? []).map((r) => r.projectname));
+      setProjects((projectsRes.data ?? []).map((r: any) => r.projectname));
       setLoading(false);
     }
     load();

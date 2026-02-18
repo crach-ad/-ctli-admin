@@ -38,7 +38,7 @@ export default function LoginPage() {
       .select("role")
       .eq("user_id", authData.user.id);
 
-    const roles = (roleRows ?? []).map((r) => r.role);
+    const roles = (roleRows ?? []).map((r: any) => r.role);
     const isAdmin = roles.includes("admin");
 
     router.push(isAdmin ? "/" : "/staff");

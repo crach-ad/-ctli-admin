@@ -31,7 +31,7 @@ export function FilterBar({ filters, onFilterChange, onClear, hasFilters }: Filt
         .from("project_name")
         .select("projectname")
         .order("projectname");
-      setProjects((data ?? []).map((r) => r.projectname));
+      setProjects((data ?? []).map((r: any) => r.projectname));
     }
     load();
   }, []);

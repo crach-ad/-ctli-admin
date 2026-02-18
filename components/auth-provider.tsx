@@ -29,11 +29,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const supabaseRef = useRef<SupabaseClient | null>(null);
 
-  function getSupabase() {
+  function getSupabase(): SupabaseClient {
     if (!supabaseRef.current) {
       supabaseRef.current = createClient();
     }
-    return supabaseRef.current;
+    return supabaseRef.current!;
   }
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           .from("user_roles")
           .select("role")
           .eq("user_id", user.id);
-        setRoles((data ?? []).map((r) => r.role as UserRole));
+        setRoles((data ?? []).map((r: any) => r.role as UserRole));
       }
 
       setLoading(false);
@@ -73,7 +73,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           .from("user_roles")
           .select("role")
           .eq("user_id", session.user.id);
-        setRoles((data ?? []).map((r) => r.role as UserRole));
+        setRoles((data ?? []).map((r: any) => r.role as UserRole));
       } else {
         setRoles([]);
       }

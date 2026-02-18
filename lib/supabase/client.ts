@@ -1,17 +1,20 @@
 import { createBrowserClient } from "@supabase/ssr";
 
+let client: ReturnType<typeof createBrowserClient> | null = null;
+
 export function createClient() {
+  if (client) return client;
+
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!url || !key) {
-    // During build/prerender, env vars may not be available.
-    // Return a client pointing to a placeholder; it won't be used in SSR output.
     return createBrowserClient(
       "https://placeholder.supabase.co",
       "placeholder-key"
     );
   }
 
-  return createBrowserClient(url, key);
+  client = createBrowserClient(url, key);
+  return client;
 }
